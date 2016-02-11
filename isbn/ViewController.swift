@@ -36,9 +36,23 @@ class ViewController: UIViewController,UITextFieldDelegate {
                 let url = NSURL(string: urls)
                 let sesion = NSURLSession.sharedSession()
                 let bloque = { (datos: NSData?,resp: NSURLResponse?, error:  NSError? )-> Void in  dispatch_sync(dispatch_get_main_queue()) {
-                    let texto = NSString(data:datos!, encoding: NSUTF8StringEncoding)
-                    print(texto!)
-                    self.result.text = texto! as String
+                    //let texto = NSString(data:datos!, encoding: NSUTF8StringEncoding)
+                    do{
+                        //let json = try NSJSONSerialization.JSONObjectWithData(datos!, options: NSJSONReadingOptions.MutableLeaves)
+                        //let d1 = json[0] as! NSDictionary
+                        var data = NSData(contentsOfURL: url!)
+                        if let json: NSDictionary = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary {
+                            if let items = json["ISBN:978-84-376-0494-7"] as? NSArray {
+                                for item in items {
+                                    // construct your model objects here
+                                }
+                            }
+                        }
+
+                    }catch _ {
+                        
+                    }
+                    
                     }
                 }
                 let dt = sesion.dataTaskWithURL(url!, completionHandler: bloque)
