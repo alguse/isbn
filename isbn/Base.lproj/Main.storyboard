@@ -27,7 +27,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" id="FmK-uU-Y1q">
-                                <rect key="frame" x="20" y="172" width="280" height="376"/>
+                                <rect key="frame" x="20" y="172" width="300" height="202"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -49,10 +49,15 @@
                                     <action selector="clear:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QHm-LX-IcX"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="8Tq-6E-w7m">
+                                <rect key="frame" x="20" y="382" width="128" height="166"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="cover" destination="8Tq-6E-w7m" id="Fru-ED-m8O"/>
                         <outlet property="num" destination="fVp-DL-b92" id="Dly-92-qew"/>
                         <outlet property="result" destination="FmK-uU-Y1q" id="Y4i-D0-Gx1"/>
                     </connections>
