@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C622248B1C74EB4700347DCE /* ShelfTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C622248A1C74EB4700347DCE /* ShelfTableViewController.swift */; };
 		C6AAC3B71C690F7600033189 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AAC3B61C690F7600033189 /* AppDelegate.swift */; };
 		C6AAC3B91C690F7600033189 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AAC3B81C690F7600033189 /* ViewController.swift */; };
 		C6AAC3BC1C690F7600033189 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6AAC3BA1C690F7600033189 /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 		C6AAC3D71C690F7700033189 /* isbnUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AAC3D61C690F7700033189 /* isbnUITests.swift */; };
 		C6AAC3E51C69121400033189 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = C6AAC3E41C69121400033189 /* search.png */; };
 		C6AAC3E71C69426700033189 /* Reach.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AAC3E61C69426700033189 /* Reach.swift */; };
+		C6B20AA21C729590004B5C35 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B20AA11C729590004B5C35 /* ListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C622248A1C74EB4700347DCE /* ShelfTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShelfTableViewController.swift; sourceTree = "<group>"; };
 		C6AAC3B31C690F7600033189 /* isbn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = isbn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6AAC3B61C690F7600033189 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6AAC3B81C690F7600033189 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -51,6 +54,7 @@
 		C6AAC3D81C690F7700033189 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C6AAC3E41C69121400033189 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		C6AAC3E61C69426700033189 /* Reach.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reach.swift; sourceTree = "<group>"; };
+		C6B20AA11C729590004B5C35 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +108,9 @@
 				C6AAC3E41C69121400033189 /* search.png */,
 				C6AAC3B61C690F7600033189 /* AppDelegate.swift */,
 				C6AAC3E61C69426700033189 /* Reach.swift */,
+				C6B20AA11C729590004B5C35 /* ListViewController.swift */,
 				C6AAC3B81C690F7600033189 /* ViewController.swift */,
+				C622248A1C74EB4700347DCE /* ShelfTableViewController.swift */,
 				C6AAC3BA1C690F7600033189 /* Main.storyboard */,
 				C6AAC3BD1C690F7600033189 /* Assets.xcassets */,
 				C6AAC3BF1C690F7600033189 /* LaunchScreen.storyboard */,
@@ -265,7 +271,9 @@
 			files = (
 				C6AAC3B91C690F7600033189 /* ViewController.swift in Sources */,
 				C6AAC3E71C69426700033189 /* Reach.swift in Sources */,
+				C6B20AA21C729590004B5C35 /* ListViewController.swift in Sources */,
 				C6AAC3B71C690F7600033189 /* AppDelegate.swift in Sources */,
+				C622248B1C74EB4700347DCE /* ShelfTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +496,7 @@
 				C6AAC3DD1C690F7700033189 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C6AAC3DE1C690F7700033189 /* Build configuration list for PBXNativeTarget "isbnTests" */ = {
 			isa = XCConfigurationList;
@@ -496,6 +505,7 @@
 				C6AAC3E01C690F7700033189 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C6AAC3E11C690F7700033189 /* Build configuration list for PBXNativeTarget "isbnUITests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +514,7 @@
 				C6AAC3E31C690F7700033189 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
