@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ShelfTableViewController: UITableViewController {
 
@@ -15,9 +16,12 @@ class ShelfTableViewController: UITableViewController {
         var autor: String
     }
     
+    var db_books = [NSManagedObject]()
     var books = [Book]()
     var title_back : String = ""
     var autor_back : String = ""
+    let appDelegate =
+    UIApplication.sharedApplication().delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +30,17 @@ class ShelfTableViewController: UITableViewController {
         navigationItem.rightBarButtonItems = [add]
         tableView.delegate = self
         tableView.dataSource = self
+        
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName: "Book")
+        
+        do {
+            let results =
+            try managedContext.executeFetchRequest(fetchRequest)
+            db_books = results as! [NSManagedObject]
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
         
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -54,14 +69,18 @@ class ShelfTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return books.count
+        return db_books.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("textCell", forIndexPath: indexPath) as UITableViewCell
         
-        let row = indexPath.row
-        cell.textLabel?.text = books[row].title
+        //let row = indexPath.row
+        //cell.textLabel?.text = db_books[row].title
+        let temp_book = db_books[indexPath.row]
+        
+        cell.textLabel!.text =
+            temp_book.valueForKey("db_title") as? String
         
         return cell
     }
@@ -80,7 +99,9 @@ class ShelfTableViewController: UITableViewController {
             sigVista.firstViewController = self            
             if sender != nil{
             let selectedRow = tableView.indexPathForSelectedRow!.row
-            sigVista.book_r = books[selectedRow]
+            //sigVista.book_r = books[selectedRow]
+            let temp_book = db_books[selectedRow]
+            sigVista.db_id = temp_book.valueForKey("id") as! String
             }
         }
     }
@@ -103,17 +124,24 @@ class ShelfTableViewController: UITableViewController {
     }
     */
 
-    /*
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            // Delete the row from the data source
+            let context:NSManagedObjectContext = appDelegate.managedObjectContext
+            context.deleteObject(db_books[indexPath.row] as NSManagedObject)
+            db_books.removeAtIndex(indexPath.row)
+
+            do{
+                try context.save()
+            }catch {
+                abort()
+            }
+        
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
-    */
 
     /*
     // Override to support rearranging the table view.
@@ -139,11 +167,24 @@ class ShelfTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    override func viewDidAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         if self.title_back != "" {
-        let li : Book = Book(title: title_back, autor: autor_back)
-            books.append(li)
-            self.tableView.reloadData()
+        //let li : Book = Book(title: title_back, autor: autor_back)
+            //books.append(li)
+            //self.tableView.reloadData()
+            let appDelegate =
+            UIApplication.sharedApplication().delegate as! AppDelegate
+            let managedContext = appDelegate.managedObjectContext
+            let fetchRequest = NSFetchRequest(entityName: "Book")
+            do {
+                let results =
+                try managedContext.executeFetchRequest(fetchRequest)
+                db_books = results as! [NSManagedObject]
+                self.tableView.reloadData()
+            } catch let error as NSError {
+                print("Could not fetch \(error), \(error.userInfo)")
+            }
         }
     }
 }

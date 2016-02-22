@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C622248B1C74EB4700347DCE /* ShelfTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C622248A1C74EB4700347DCE /* ShelfTableViewController.swift */; };
+		C62A4E961C7AA75E0015697A /* isbn.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C62A4E941C7AA75E0015697A /* isbn.xcdatamodeld */; };
 		C6AAC3B71C690F7600033189 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AAC3B61C690F7600033189 /* AppDelegate.swift */; };
 		C6AAC3B91C690F7600033189 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AAC3B81C690F7600033189 /* ViewController.swift */; };
 		C6AAC3BC1C690F7600033189 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6AAC3BA1C690F7600033189 /* Main.storyboard */; };
@@ -17,7 +18,6 @@
 		C6AAC3D71C690F7700033189 /* isbnUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AAC3D61C690F7700033189 /* isbnUITests.swift */; };
 		C6AAC3E51C69121400033189 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = C6AAC3E41C69121400033189 /* search.png */; };
 		C6AAC3E71C69426700033189 /* Reach.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AAC3E61C69426700033189 /* Reach.swift */; };
-		C6B20AA21C729590004B5C35 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B20AA11C729590004B5C35 /* ListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		C622248A1C74EB4700347DCE /* ShelfTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShelfTableViewController.swift; sourceTree = "<group>"; };
+		C62A4E951C7AA75E0015697A /* isbn.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = isbn.xcdatamodel; sourceTree = "<group>"; };
 		C6AAC3B31C690F7600033189 /* isbn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = isbn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6AAC3B61C690F7600033189 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6AAC3B81C690F7600033189 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,7 +55,6 @@
 		C6AAC3D81C690F7700033189 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C6AAC3E41C69121400033189 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		C6AAC3E61C69426700033189 /* Reach.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reach.swift; sourceTree = "<group>"; };
-		C6B20AA11C729590004B5C35 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,9 +106,9 @@
 			isa = PBXGroup;
 			children = (
 				C6AAC3E41C69121400033189 /* search.png */,
+				C62A4E941C7AA75E0015697A /* isbn.xcdatamodeld */,
 				C6AAC3B61C690F7600033189 /* AppDelegate.swift */,
 				C6AAC3E61C69426700033189 /* Reach.swift */,
-				C6B20AA11C729590004B5C35 /* ListViewController.swift */,
 				C6AAC3B81C690F7600033189 /* ViewController.swift */,
 				C622248A1C74EB4700347DCE /* ShelfTableViewController.swift */,
 				C6AAC3BA1C690F7600033189 /* Main.storyboard */,
@@ -270,8 +270,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6AAC3B91C690F7600033189 /* ViewController.swift in Sources */,
+				C62A4E961C7AA75E0015697A /* isbn.xcdatamodeld in Sources */,
 				C6AAC3E71C69426700033189 /* Reach.swift in Sources */,
-				C6B20AA21C729590004B5C35 /* ListViewController.swift in Sources */,
 				C6AAC3B71C690F7600033189 /* AppDelegate.swift in Sources */,
 				C622248B1C74EB4700347DCE /* ShelfTableViewController.swift in Sources */,
 			);
@@ -517,6 +517,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C62A4E941C7AA75E0015697A /* isbn.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C62A4E951C7AA75E0015697A /* isbn.xcdatamodel */,
+			);
+			currentVersion = C62A4E951C7AA75E0015697A /* isbn.xcdatamodel */;
+			path = isbn.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C6AAC3AB1C690F7600033189 /* Project object */;
 }

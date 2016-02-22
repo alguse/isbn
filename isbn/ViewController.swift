@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController,UITextFieldDelegate {
 
@@ -16,30 +17,53 @@ class ViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var result: UITextView!
     var book_r : ShelfTableViewController.Book!
     var titulo : String = ""
+    var portada : String = ""
     var autores : String = ""
     weak var firstViewController : ShelfTableViewController?
     @IBOutlet weak var save: UIButton!
     @IBOutlet weak var lookup: UIButton!
     @IBOutlet weak var clear: UIButton!
-    
-    struct Book_v2 {
-        var title: String
-        var autor: String
-    }
+    var db_id : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         num.delegate = self
         num.returnKeyType = UIReturnKeyType.Search
+        
+        if db_id != ""{
+        save.hidden = true
+        clear.hidden = true
+        num.hidden = true
+        lookup.hidden = true
+        headline.text = "Consulta de libro"
+        firstViewController?.title_back = ""
+        firstViewController?.autor_back = ""
+        
+        let appDelegate =
+        UIApplication.sharedApplication().delegate as! AppDelegate
+        var db_res = [NSManagedObject]()
+        
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName: "Book")
+        let predicate = NSPredicate(format: "id == %@", db_id)
+        fetchRequest.predicate = predicate
+        
+        do {
+            let results =
+            try managedContext.executeFetchRequest(fetchRequest)
+            db_res = results as! [NSManagedObject]
+            self.result.text = "Titulo: \(db_res[0].valueForKey("db_title")!)\n"
+            self.result.text = self.result.text + "Autores: \n"  + (db_res[0].valueForKey("db_autores") as! String)
+            if db_res[0].valueForKey("db_cover") != nil{
+                self.cover.image = UIImage(data: db_res[0].valueForKey("db_cover") as! NSData)
+            }
+
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        /*
         if book_r != nil{
-            //Consulta
-            save.hidden = true
-            clear.hidden = true
-            num.hidden = true
-            lookup.hidden = true
-            headline.text = "Consulta de libro"
-            firstViewController?.title_back = ""
-            firstViewController?.autor_back = ""
+            //Consulta DICTIONARIES
             
             if book_r.title != ""{
                 self.result.text = "Titulo: \(book_r.title)\n"
@@ -47,6 +71,7 @@ class ViewController: UIViewController,UITextFieldDelegate {
             if book_r.autor != ""{
                 self.result.text = self.result.text + "Autores: \n"  + book_r.autor
             }
+*/
         }else{
             save.hidden = false
             num.hidden = false
@@ -63,8 +88,10 @@ class ViewController: UIViewController,UITextFieldDelegate {
         
         firstViewController?.title_back = titulo
         firstViewController?.autor_back = autores
+        self.saveData(titulo, autores: autores)
+        
         navigationController?.popViewControllerAnimated(true)
-
+        
         //self.dismissViewControllerAnimated(true, completion: nil)
 
     }
@@ -91,7 +118,7 @@ class ViewController: UIViewController,UITextFieldDelegate {
                         let jsonObject = try NSJSONSerialization.JSONObjectWithData(datos!, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
                         
                         if let bookDictionary: AnyObject = jsonObject!["ISBN:\(self.num.text!)"] {
-                            let title : String = bookDictionary["title"] as! String
+                           let title = bookDictionary["title"] as! String
                            self.result.text = "Titulo: \(title)\n"
                             self.titulo = title
                             var names = [String]()
@@ -106,6 +133,7 @@ class ViewController: UIViewController,UITextFieldDelegate {
                             let strinIng = names.joinWithSeparator(", ")
                             self.result.text =                        self.result.text + "Autores: \n"  + strinIng
                             self.autores = strinIng
+                            
                             // Retrieve cover url
                             var coverThumbURL: String = ""
                             if let thumbs = bookDictionary["cover"] as? NSDictionary {
@@ -116,11 +144,12 @@ class ViewController: UIViewController,UITextFieldDelegate {
                                 self.result.text = self.result.text + "\nImagen: " + coverThumbURL
 
                                 let dataI = NSData(contentsOfURL: urlI!)
-                                    self.cover.image = UIImage(data: dataI!)
+                                self.cover.image = UIImage(data: dataI!)
                             }else{
                                 self.result.text = self.result.text + "\nImagen no disponible "
                             }
                         }
+                        
                     }catch _ {
                     }
                     
@@ -140,6 +169,46 @@ class ViewController: UIViewController,UITextFieldDelegate {
             self.presentViewController(alertController, animated: true, completion: nil)
         }
             }
+    
+    func saveData(name: String, autores: String) {
+        let appDelegate =
+        UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        let entity =  NSEntityDescription.entityForName("Book",
+            inManagedObjectContext:managedContext)
+        
+        let b = NSManagedObject(entity: entity!,
+            insertIntoManagedObjectContext: managedContext)
+        
+        b.setValue(randomStringWithLength(5) as String, forKey: "id")
+        b.setValue(name, forKey: "db_title")
+        b.setValue(autores, forKey: "db_autores")
+        if self.cover.image != nil{
+            b.setValue(UIImagePNGRepresentation(self.cover.image!), forKey: "db_cover")
+        }
+        
+        do {
+            try managedContext.save()
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        }
+    }
+    
+    func randomStringWithLength (len : Int) -> NSString {
+        
+        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        
+        let randomString : NSMutableString = NSMutableString(capacity: len)
+        
+        for (var i=0; i < len; i++){
+            let length = UInt32 (letters.length)
+            let rand = arc4random_uniform(length)
+            randomString.appendFormat("%C", letters.characterAtIndex(Int(rand)))
+        }
+        
+        return randomString
+    }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         search()
